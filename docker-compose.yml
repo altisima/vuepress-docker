@@ -1,0 +1,14 @@
+version: "3.8"
+
+services:
+  vuepress:
+    build: .
+    ports:
+      - "8080:8080" # Dev server s hot reload
+      - "9090:9090" # Statická produkční verze
+    volumes:
+      - /c/work/projects/cdn/jidelna:/site:ro # Mount obsahu (read-only)
+    environment:
+      - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING=true
+    restart: unless-stopped
